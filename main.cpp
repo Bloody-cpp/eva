@@ -1,32 +1,25 @@
 #include <iostream>
 #include <stdint.h>
+#include <random>
 
 using namespace std;
 
 int main(int, char**){
-    int64_t a, b;
-    char operation;
+    mt19937_64 gen(time(0));
+    uint64_t a = gen() % 200;
     while(true) {
-        int64_t result = 0;
-        cin >> a >> b >> operation;
-        switch (operation)
-        {
-        case '+':
-            result = a + b;
-            break;
-        case '-':
-            result = a - b;
-            break;
-        case '*':
-            result = a * b;
-            break;
-        case '/':
-            result = a / b;
-            break;
-        default:
-            cout << "error unknown operation" << endl;
-            break;
+        uint64_t choise; 
+        cin >> choise;
+        if (a == choise) { 
+            cout << "Ты угадал!" << endl;
+            a = gen() % 200;
+            continue;
         }
-        cout << "Result: " << result << endl;
+        if (a < choise) {
+            cout << "Загаданное число меньше" << endl;
+        }
+        if (a > choise) {
+            cout << "Загаданное число больше" << endl;
+        }
     }
 }
